@@ -1,0 +1,22 @@
+{
+  "name": "native-image-samples",
+  "version": "1.0.0",
+  "description": "Sample project to use native-image.js package",
+  "main": "dist/app.js",
+  "scripts": {
+    "dev": "ts-node src/app.ts",
+    "build": "tsc",
+    "prestart": "npm run build",
+    "start": "node dist/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "GPL-3.0-only",
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "@billwen/native-image": "^0.0.2"
+  }
+}
