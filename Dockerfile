@@ -7,11 +7,13 @@ LABEL authors="billwen"
 
 RUN apt-get update  \
     && apt install -y ca-certificates curl gnupg \
-    && mkdir -p /etc/apt/keyrings \
-    && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
-    && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list \
-    && apt update \
-    && apt install -y nodejs \
+    # && mkdir -p /node20 \
+    # && cd /node20 \
+    # && curl -fsSL https://deb.nodesource.com/setup_20.x -o nodesource_setup.sh \
+    # && bash nodesource_setup.sh \
+    && apt install -y nodejs npm libnode-dev \
+    # && cd .. \
+    # && rm -fr node20 \
     && apt-get install -y libfftw3-dev \
     libopenexr-dev \
     libgsf-1-dev \
@@ -39,6 +41,8 @@ RUN apt-get update  \
 FROM base AS builder
 
 WORKDIR /app
+RUN node -v
+RUN npm -v
 COPY . .
 RUN npm install && npm run build
 CMD [ "node", "./dist/app.js" ]
